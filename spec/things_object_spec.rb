@@ -5,7 +5,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 module Everything
   describe ThingsObject do
     before do
-      @doc = <<-EOS
+      @doc = Nokogiri::XML.parse(<<-EOS).xpath('//object').first
         <object type="FOCUS" id="z110">
             <attribute name="focustype" type="int32">1</attribute>
             <attribute name="focuslevel" type="int16">0</attribute>
@@ -17,8 +17,7 @@ module Everything
             <relationship name="focustodos" type="0/0" destination="TODO" idrefs="z144"></relationship>
         </object>
       EOS
-      objects = Nokogiri::XML.parse(@doc).xpath('object')
-      @object = ThingsObject.new(objects.first)
+      @object = ThingsObject.new(@doc)
     end
 
     it 'can take id and type' do
