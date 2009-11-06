@@ -8,17 +8,17 @@ Syncronizing tool for Things
 == Example
 
   # List all tasks with status
-  Everything.connect do |things|
-    things.inbox.each do |t|
-      status = t.completed? '+' : '-'
+  Everything.new do |things|
+    things.focus(:inbox).each do |t|
+      status = t.completed? ? '+' : t.canceled? ? 'x' : '-'
       puts "#{status} : #{t.title}"
     end
   end
 
   # List incompleted tasks which are tagged as work
-  Everything.run('/path/to/database') do |t|
-    t.today.tag(:work).each do |task|
-      if !task.completed? && task.task.canceled?
+  Everything.new('/path/to/database') do |t|
+    t.focus(:today).tag(:work).each do |task|
+      if task.incompleted?
         pust task.title
       end
     end
@@ -29,6 +29,12 @@ Syncronizing tool for Things
 * Nokogiri
 
   sudo gem install nokogiri
+
+== TODO
+
+* Date management
+* Create new task and save edit result
+* find method needs to be more general
 
 == LICENSE:
 
