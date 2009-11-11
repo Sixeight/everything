@@ -64,9 +64,13 @@ module Everything
           ids   = relationship['idrefs']
           unless ids.empty?
             target = thing(klass)
-            return ids.split.map {|id|
+            result = ids.split.map {|id|
               target.find(id)
             }.compact
+            if relationship['type'] == '1/1'
+              result = result.first
+            end
+            return result
           end
         end
       end

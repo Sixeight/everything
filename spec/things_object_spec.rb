@@ -79,13 +79,20 @@ module Everything
     it 'can take relationship by name (same class)' do
       ThingsObject.stub(:find => :thing)
       todo = @object.relationship(:parent)
-      todo.should == [:thing]
+      todo.should == :thing
     end
 
     it 'can take relationship by name (Notes)' do
       Todo.stub(:find => :notes)
       todo = @object.relationship(:notes)
       todo.should == [:notes]
+    end
+
+    it 'can take relationship by name (correct amount)' do
+      Todo.stub(:find => :amount)
+      @object.relationship(:focustodos).should be_an_instance_of(Array)
+      ThingsObject.stub(:find => :amount)
+      @object.relationship(:parent).should_not be_an_instance_of(Array)
     end
 
     it 'returns nil when take invalid name' do
