@@ -28,8 +28,10 @@ module Everything
 
     def initialize(doc)
       @doc  = doc
-      @relationships =
-        doc.xpath('relationship').map {|r| r['name'] }
+      %w[ relationship attribute ].each do |name|
+        names = @doc.xpath(name).map {|e| e['name'] }
+        instance_variable_set :"@#{name}s", names
+      end
       undef_methods
     end
 
@@ -98,12 +100,10 @@ module Everything
     private
     def undef_methods
       all_methods = self.class.instance_methods
-      @attributes = @doc.xpath('attribute').map do |a|
-        target = a['name']
+      @attributes.each do |target|
         if all_methods.include? target
           self.class.__send__(:undef_method, target)
         end
-        target
       end
     end
 
