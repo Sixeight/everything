@@ -16,15 +16,22 @@ module Everything
     end
 
     def incompleted?
-      status == STATUS::INCOMPLETED
+      is_now? :incompleted
     end
 
     def completed?
-      status == STATUS::COMPLETED
+      is_now? :completed
     end
 
     def canceled?
-      status == STATUS::CANCELED
+      is_now? :canceled
+    end
+
+    # FIXME: exception needs to move into base class
+    def is_now?(state)
+      status == STATUS.const_get(state.to_s.upcase)
+    rescue
+      false
     end
 
     module ClassMethods

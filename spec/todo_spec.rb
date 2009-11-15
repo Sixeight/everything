@@ -96,6 +96,17 @@ module Everything
       should == false
     end
 
+    it 'supports item that doesnt has status' do
+      # FIXME: very dirty
+      Todo.class_eval do
+        def status; raise NoMethodError
+        end
+      end
+      lambda {
+        @todo.incompleted?.should be_false
+      }.should_not raise_error
+    end
+
     describe Todo::ClassMethods do
 
       it 'adds self to focuses' do
