@@ -38,6 +38,10 @@ module Everything
       end
     end
 
+    def inspect
+      "#<#{self.class} #{__id__} '#{identifier}'>"
+    end
+
     module ClassMethods
 
       VALID_NAME_PATTERN = /\AFocus(?:[A-Z].+)+\z/

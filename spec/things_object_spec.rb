@@ -99,6 +99,10 @@ module Everything
       @object.relationship('hoge').should be_nil
     end
 
+    it 'has simple information to show itself' do
+      @object.inspect.should == "#<Everything::ThingsObject #{@object.__id__}>"
+    end
+
     subject { @object }
     its :parent? do
       should == false

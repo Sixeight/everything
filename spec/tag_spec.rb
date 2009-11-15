@@ -72,6 +72,10 @@ module Everything
       end
     end
 
+    it 'has simple information to show itself' do
+      @tag.inspect.should == "#<Everything::Tag #{@tag.__id__} 'Home'>"
+    end
+
     describe Tag::ClassMethods do
 
       it 'adds self to tag' do

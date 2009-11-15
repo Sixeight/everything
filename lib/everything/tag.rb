@@ -21,6 +21,10 @@ module Everything
       end
     end
 
+    def inspect
+      "#<#{self.class} #{__id__} '#{title}'>"
+    end
+
     module ClassMethods
 
       def self.extended(base)

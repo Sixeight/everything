@@ -78,6 +78,10 @@ module Everything
       end
     end
 
+    it 'has simple information to show itself' do
+      @focus.inspect.should == "#<Everything::Focus #{@focus.__id__} '#{@focus.identifier}'>"
+    end
+
     describe Focus::ClassMethods do
 
       it 'adds self to focuses' do

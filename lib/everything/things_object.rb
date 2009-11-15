@@ -97,6 +97,10 @@ module Everything
       super
     end
 
+    def inspect
+      "#<#{self.class} #{__id__}>"
+    end
+
     private
     def undef_methods
       all_methods = self.class.instance_methods

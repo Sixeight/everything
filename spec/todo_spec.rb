@@ -107,6 +107,11 @@ module Everything
       }.should_not raise_error
     end
 
+    it 'has simple information to show itself' do
+      @todo.inspect.should == "#<Everything::Todo #{@todo.__id__} '#{@todo.title}'>"
+    end
+
+
     describe Todo::ClassMethods do
 
       it 'adds self to focuses' do
