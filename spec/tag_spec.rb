@@ -66,6 +66,12 @@ module Everything
       end
     end
 
+    it 'has enumerable methods' do
+      Enumerable.instance_methods.each do |meth|
+        @tag.should respond_to meth
+      end
+    end
+
     describe Tag::ClassMethods do
 
       it 'adds self to tag' do

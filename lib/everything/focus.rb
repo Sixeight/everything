@@ -4,6 +4,8 @@ module Everything
 
   class Focus < ThingsObject
 
+    include Enumerable
+
     def initialize(*args)
       super(*args)
       self.class.__send__(:add_focus, self)

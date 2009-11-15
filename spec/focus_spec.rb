@@ -72,6 +72,12 @@ module Everything
       end
     end
 
+    it 'has enumerable methods' do
+      Enumerable.instance_methods.each do |meth|
+        @focus.should respond_to meth
+      end
+    end
+
     describe Focus::ClassMethods do
 
       it 'adds self to focuses' do

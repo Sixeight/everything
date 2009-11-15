@@ -4,6 +4,8 @@ module Everything
 
   class Tag < ThingsObject
 
+    include Enumerable
+
     def initialize(*args)
       super(*args)
       self.class.__send__(:add_tag, self)
